@@ -4,6 +4,7 @@ import java.util.LinkedList
 class CustomStack<T> {
     private val container = LinkedList<T>()
     var size: Int = 0
+        private set
 
     fun push(t: T) = container.add(t).also { size++ }
     fun pop(): T {

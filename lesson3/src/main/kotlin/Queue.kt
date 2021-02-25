@@ -4,6 +4,7 @@ import java.util.LinkedList
 class CustomQueue<T> {
     private val container = LinkedList<T>()
     var size: Int = 0
+        private set
 
     fun enqueue(t: T) = container.add(t).also { size++ }
 
