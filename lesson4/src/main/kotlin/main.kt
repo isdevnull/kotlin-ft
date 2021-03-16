@@ -1,34 +1,54 @@
-fun main() {
-    val dbAirports = DBAirports()
-    val dbFlights = DBFlights()
-    val airportRoutes = AirportService().getAllAirportRoutes(dbAirports, dbFlights)
+fun testPredicate(airportService: AirportService) = buildString {
+        appendLine("Testing getAllAirportRoutesByPredicate")
+        appendLine()
+        airportService.getAllAirportRoutesByPredicate() { it.country == "USA" }.also { appendLine("Size = ${it.size}") }
+            .forEach {
+                append(it.prettyPrint())
+            }
+        appendLine("Finished testing getAllAirportRoutesByPredicate!")
+        appendLine()
+}
 
-    println("Testing getAllAirportRoutesByPredicate")
-    println()
-    AirportService().getAllAirportRoutesByPredicate(airportRoutes) {it.country == "USA"}.also{println("Size = ${it.size}")}. forEach {
-        it.prettyPrint()
-        println()
+fun testSortedByCity(airportService: AirportService) = buildString {
+    appendLine("Testing getAllAirportRoutesSortedByCity")
+    appendLine()
+    airportService.getAllAirportRoutesSortedByCity().forEach {
+        append(it.prettyPrint())
     }
-    println("Finished testing getAllAirportRoutesByPredicate!")
-    println()
+    appendLine("Finished testing getAllAirportRoutesSortedByCity!")
+    appendLine()
+}
 
-    println("Testing getAllAirportRoutesSortedByCity")
-    println()
-    AirportService().getAllAirportRoutesSortedByCity(airportRoutes).forEach {
-        it.prettyPrint()
-        println()
-    }
-    println("Finished testing getAllAirportRoutesSortedByCity!")
-    println()
-
-    println("Testing getAllAirportRoutesGroupedByCountry")
-    println()
-    AirportService().getAllAirportRoutesGroupedByCountry(airportRoutes).forEach() {
-        println(it.key)
-        it.value.forEach {
-            elem -> elem.prettyPrint()
-            println()
+fun testGroupedByCountry(airportService: AirportService) = buildString {
+    appendLine("Testing getAllAirportRoutesGroupedByCountry")
+    appendLine()
+    airportService.getAllAirportRoutesGroupedByCountry().forEach { route ->
+        appendLine(route.key)
+        route.value.forEach { airport ->
+            append(airport.prettyPrint())
         }
     }
-    println("Finished testing getAllAirportRoutesGroupedByCountry")
+    appendLine("Finished testing getAllAirportRoutesGroupedByCountry!")
+    appendLine()
+}
+
+fun testCountArrivalsDepartures(airportService: AirportService) = buildString {
+    appendLine("Testing testCountArrivalsDepartures")
+    appendLine()
+
+    appendLine(airportService.getCountArrivalsByAirport("MAD"))
+    appendLine(airportService.getCountDeparturesByAirport("SFO"))
+
+    appendLine("Finished testing testCountArrivalsDepartures!")
+}
+
+fun main() {
+    val airportService = AirportService(DBAirports(), DBFlights())
+    val output = buildString {
+        append(testPredicate(airportService))
+        append(testSortedByCity(airportService))
+        append(testGroupedByCountry(airportService))
+        append(testCountArrivalsDepartures(airportService))
+    }
+    print(output)
 }
