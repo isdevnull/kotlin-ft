@@ -3,12 +3,11 @@ import java.util.LinkedList
 
 class CustomStack<T> {
     private val container = LinkedList<T>()
-    var size: Int = 0
-        private set
+    val size: Int
+        get() = container.size
 
-    fun push(t: T) = container.add(t).also { size++ }
+    fun push(t: T) = container.add(t)
     fun pop(): T {
-        size--
         val res:T
         if (container.size > 0)
             res = container.last().also { container.removeLast() }
