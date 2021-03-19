@@ -1,40 +1,33 @@
 fun testPredicate(airportService: AirportService) = buildString {
-        appendLine("Testing getAllAirportRoutesByPredicate")
-        appendLine()
+        appendLine("Testing getAllAirportRoutesByPredicate\n")
         airportService.getAllAirportRoutesByPredicate() { it.country == "USA" }.also { appendLine("Size = ${it.size}") }
             .forEach {
                 append(it.prettyPrint())
             }
-        appendLine("Finished testing getAllAirportRoutesByPredicate!")
-        appendLine()
+        appendLine("Finished testing getAllAirportRoutesByPredicate!\n")
 }
 
 fun testSortedByCity(airportService: AirportService) = buildString {
-    appendLine("Testing getAllAirportRoutesSortedByCity")
-    appendLine()
+    appendLine("Testing getAllAirportRoutesSortedByCity\n")
     airportService.getAllAirportRoutesSortedByCity().forEach {
         append(it.prettyPrint())
     }
-    appendLine("Finished testing getAllAirportRoutesSortedByCity!")
-    appendLine()
+    appendLine("Finished testing getAllAirportRoutesSortedByCity!\n")
 }
 
 fun testGroupedByCountry(airportService: AirportService) = buildString {
-    appendLine("Testing getAllAirportRoutesGroupedByCountry")
-    appendLine()
+    appendLine("Testing getAllAirportRoutesGroupedByCountry\n")
     airportService.getAllAirportRoutesGroupedByCountry().forEach { route ->
         appendLine(route.key)
         route.value.forEach { airport ->
             append(airport.prettyPrint())
         }
     }
-    appendLine("Finished testing getAllAirportRoutesGroupedByCountry!")
-    appendLine()
+    appendLine("Finished testing getAllAirportRoutesGroupedByCountry!\n")
 }
 
 fun testCountArrivalsDepartures(airportService: AirportService) = buildString {
-    appendLine("Testing testCountArrivalsDepartures")
-    appendLine()
+    appendLine("Testing testCountArrivalsDepartures\n")
 
     appendLine(airportService.getCountArrivalsByAirport("MAD"))
     appendLine(airportService.getCountDeparturesByAirport("SFO"))
