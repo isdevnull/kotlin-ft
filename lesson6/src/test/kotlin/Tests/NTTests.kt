@@ -1,3 +1,6 @@
+package Tests
+
+import NT
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import kotlin.math.*
