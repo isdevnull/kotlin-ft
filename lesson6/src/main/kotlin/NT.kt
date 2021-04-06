@@ -11,7 +11,7 @@ class NT {
             when {
                 x % i == 0L || x % (i + 2) == 0L -> return false
             }
-            i++
+            i += 6
         }
         return true
     }
